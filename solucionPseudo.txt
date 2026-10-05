@@ -1,0 +1,64 @@
+Inicio
+
+	Escribe "CAJA DE LA TIENDA"
+
+	precio_producto = 0
+	unidades_producto = 0
+	total_unidades = 0
+	importe_acumulado_compra = 0
+	porcentaje_descuento = 0
+	descuento_euros = 0
+	importe_final = 0
+
+	Escribe "Introduce el precio unitario en euros (0 para terminar):"
+	Lee precio_producto
+
+	Mientras precio_producto < 0 hacer
+		Escribe "El precio no puede ser negativo."
+		Escribe "Introduce el precio unitario en euros (0 para terminar):"
+		Lee precio_producto
+
+	Mientras precio_producto <> 0 hacer
+
+		Escribe "Introduce el número de unidades:"
+		Lee unidades_producto
+
+		Mientras unidades_producto <= 0 hacer
+			Escribe "Las unidades deben ser mayores que 0."
+			Escribe "Introduce el número de unidades:"
+			Lee unidades_producto
+
+		total_unidades = total_unidades + unidades_producto
+		importe_acumulado_compra = importe_acumulado_compra + (precio_producto * unidades_producto)
+
+		Escribe "Introduce el precio unitario en euros (0 para terminar):"
+		Lee precio_producto
+
+		Mientras precio_producto < 0 hacer
+			Escribe "El precio no puede ser negativo."
+			Escribe "Introduce el precio unitario en euros (0 para terminar):"
+			Lee precio_producto
+
+	Si total_unidades = 0 entonces
+		Escribe "No se han registrado productos."
+	Sino
+
+		Si importe_acumulado_compra < 50 entonces
+			porcentaje_descuento = 0
+		Sino
+			Si importe_acumulado_compra < 100 entonces
+				porcentaje_descuento = 5
+			Sino
+				porcentaje_descuento = 10
+
+		descuento_euros = importe_acumulado_compra * porcentaje_descuento / 100
+		importe_final = importe_acumulado_compra - descuento_euros
+
+		Escribe "RESUMEN DE LA COMPRA"
+		Escribe "Unidades compradas: ", total_unidades
+		Escribe "Importe antes del descuento: ", importe_acumulado_compra, " euros"
+		Escribe "Descuento aplicado: ", porcentaje_descuento, " %"
+		Escribe "Descuento: ", descuento_euros, " euros"
+		Escribe "Importe final: ", importe_final, " euros"
+
+Fin
