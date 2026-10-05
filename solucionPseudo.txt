@@ -1,64 +1,49 @@
 Inicio
 
 	Escribe "CAJA DE LA TIENDA"
-
-	precio_producto = 0
-	unidades_producto = 0
+	
+	total_importe = 0
 	total_unidades = 0
-	importe_acumulado_compra = 0
-	porcentaje_descuento = 0
-	descuento_euros = 0
-	importe_final = 0
+	salir = False
 
-	Escribe "Introduce el precio unitario en euros (0 para terminar):"
-	Lee precio_producto
-
-	Mientras precio_producto < 0 hacer
-		Escribe "El precio no puede ser negativo."
+	Mientras salir == False hacer
 		Escribe "Introduce el precio unitario en euros (0 para terminar):"
-		Lee precio_producto
+		Lee precio
 
-	Mientras precio_producto <> 0 hacer
-
-		Escribe "Introduce el número de unidades:"
-		Lee unidades_producto
-
-		Mientras unidades_producto <= 0 hacer
-			Escribe "Las unidades deben ser mayores que 0."
-			Escribe "Introduce el número de unidades:"
-			Lee unidades_producto
-
-		total_unidades = total_unidades + unidades_producto
-		importe_acumulado_compra = importe_acumulado_compra + (precio_producto * unidades_producto)
-
-		Escribe "Introduce el precio unitario en euros (0 para terminar):"
-		Lee precio_producto
-
-		Mientras precio_producto < 0 hacer
-			Escribe "El precio no puede ser negativo."
-			Escribe "Introduce el precio unitario en euros (0 para terminar):"
-			Lee precio_producto
-
-	Si total_unidades = 0 entonces
-		Escribe "No se han registrado productos."
-	Sino
-
-		Si importe_acumulado_compra < 50 entonces
-			porcentaje_descuento = 0
-		Sino
-			Si importe_acumulado_compra < 100 entonces
-				porcentaje_descuento = 5
+		Si precio == 0 entonces
+			salir == True
 			Sino
-				porcentaje_descuento = 10
+				Si precio < 0 entonces
+					Escribe "El precio no puede ser negativo."
+				Sino
+					Si precio != 0 entonces
+						unidades = 0
+			
+						Mientras unidades <= 0 hacer
+							Escribe "Introduce el número de unidades:"
+							Lee unidades
+							Si unidades <= 0 entonces
+								Escribe "La cantidad debe ser menor que 0"
+							Sino		
+								total_importe = total_importe + (precio * unidades)
+								total_unidades = total_unidades + unidades
 
-		descuento_euros = importe_acumulado_compra * porcentaje_descuento / 100
-		importe_final = importe_acumulado_compra - descuento_euros
+Si total_importe == 0 entonces
+	Escribe "No se han registrado productos"
+Sino
+	Si total_importe < 50 entonces
+		dto_aplicado = 0
+	Si total_importe < 100 entonces
+		dto_aplicado = 5
+	Sino
+		dto_aplicado = 10
 
-		Escribe "RESUMEN DE LA COMPRA"
-		Escribe "Unidades compradas: ", total_unidades
-		Escribe "Importe antes del descuento: ", importe_acumulado_compra, " euros"
-		Escribe "Descuento aplicado: ", porcentaje_descuento, " %"
-		Escribe "Descuento: ", descuento_euros, " euros"
-		Escribe "Importe final: ", importe_final, " euros"
+	Escribe "RESUMEN DE LA COMPRA"
+	Escribe "Unidades compradas " + total_unidades 
+	Escribe "Importe antes del descuento: " + total_importe + " euros"
+	Escribe "Descuento aplicado: " + dto_aplicado + " %"
+	descuento = total_importe * (dto_aplicado / 100)
+	Escribe "Descuento: " + descuento + " euros"
+	Escribe "Importe final: " ++ " euros"
 
 Fin
